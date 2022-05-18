@@ -14,7 +14,7 @@ class ShowSubmittedList extends Component {
 
   componentDidMount() {
     axios
-      .get('http://localhost:8082/api/submitted')
+      .get('https://speed-cise.herokuapp.com/api/submitted')
       .then(res => {
         this.setState({
           submitted: res.data

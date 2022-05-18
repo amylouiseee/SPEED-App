@@ -5,9 +5,7 @@ var cors = require('cors');
 
 // routes
 const submitted = require('./routes/api/submitted');
-const compression = require('compression');
 const app = express();
-app.use(compression()); 
 
 // Connect Database
 connectDB();
@@ -21,9 +19,10 @@ app.use(express.json({ extended: false }));
 //app.get('/', (req, res) => res.send('Hello world!'));
 
 // use Routes
+
 app.use('/api/submitted', submitted);
 
-const port = process.env.PORT || 8082;
+const port = process.env.PORT || 5000;
 
 const path = require("path");
 
@@ -33,6 +32,7 @@ app.use(express.static(path.resolve(__dirname, "./front-end/build")));
 app.get("*", function (request, response) {
   response.sendFile(path.resolve(__dirname, "./front-end//build", "index.html"));
 });
+
 
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
