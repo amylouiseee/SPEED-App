@@ -10,8 +10,8 @@
     "install-client": "cd ../front-end && npm install",
     "heroku-postbuild": "npm run install-client && npm run build",
     "server": "nodemon server.js",
-    "develop": "concurrently --kill-others-on-fail \"npm run app\" \"npm run start --prefix front-end\"",
-    "start": "concurrently --kill-others-on-fail \"npm run app\" \"npm run start --prefix front-end\""
+    "develop": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix front-end\"",
+    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix front-end\""
   },
   "repository": {
     "type": "git",
