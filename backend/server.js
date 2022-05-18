@@ -1,13 +1,13 @@
-const express = require("express");
-const dotenv = require("dotenv");
+const express = require('express');
+const connectDB = require('./config/db');
 
-dotenv.config();
-const PORT = process.env.PORT || 4000;
+const app = express();
 
-const server = express();
+// Connect Database
+connectDB();
 
-server.get('/', (req, res) => {
-    res.send("API is running")
-});
+app.get('/', (req, res) => res.send('Hello world!'));
 
-server.listen(PORT, console.log(`Server is running on port ${PORT}.`));
+const port = process.env.PORT || 8082;
+
+app.listen(port, () => console.log(`Server running on port ${port}`));
