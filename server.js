@@ -2,10 +2,12 @@ const express = require('express');
 const connectDB = require('./config/db');
 var cors = require('cors');
 
+
 // routes
 const submitted = require('./routes/api/submitted');
-
+const compression = require('compression');
 const app = express();
+app.use(compression()); 
 
 // Connect Database
 connectDB();
