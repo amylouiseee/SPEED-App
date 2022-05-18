@@ -2,22 +2,19 @@ const mongoose = require('mongoose');
 
 const ArticleSchema = new mongoose.Schema({
   title: {
-    type: String,
-    required: true
+    type: String
   },
   authors: {
-    type: String,
-    required: true
+    type: String
   },
   source: {
     type: String
   },
-  pubyear: {
+  pubdate: {
     type: Date
   },
   doi: {
-    type: String,
-    required: true
+    type: String
   },
   claim: {
     type: String
@@ -27,4 +24,4 @@ const ArticleSchema = new mongoose.Schema({
   }
 });
 
-module.exports = Article = mongoose.model('article', ArticleSchema);
+module.exports = Articles = mongoose.model('article', ArticleSchema);

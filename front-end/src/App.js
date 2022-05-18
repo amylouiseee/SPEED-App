@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 import SEPractice from "./pages/SE-Practice";
 import SubmitArticle from "./pages/Submit-Article"; 
 import NotFoundPage from "./pages/404";
+import ShowSubmittedList from "./pages/ShowSubmittedList";
 
 const App = () =>  {
     return (
@@ -20,12 +21,14 @@ const App = () =>  {
                 <li><NavLink exact to = "/">Home</NavLink></li>
                 <li><NavLink to = "/SEPractice">Select the Practice</NavLink></li>
                 <li><NavLink to = "/SubmitArticle">Submit an Article</NavLink></li>
+                <li><NavLink to = "/ShowSubmittedList">Show Submitted Articles</NavLink></li>
           </ul>
           <div className="content">
           <Routes>
             <Route exact path="/" element={<Home/>}/>
             <Route  path="/SEPractice" element={<SEPractice/>}/>
             <Route  path="/SubmitArticle" element={<SubmitArticle/>}/>
+            <Route  path="/ShowSubmittedList" element={<ShowSubmittedList/>}/>
             <Route exact path="/404" element={<NotFoundPage/>}/>
             <Route path="*" element={<NotFoundPage/>}
     />

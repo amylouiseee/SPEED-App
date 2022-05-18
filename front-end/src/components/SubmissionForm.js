@@ -1,30 +1,145 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import React, { Component } from 'react';
+import axios from 'axios';
 
-const SubmissionForm = () => {
-  const { register, handleSubmit } = useForm();
-  const [result, setResult] = useState("");
-  const onSubmit = (data) => setResult(JSON.stringify(data));
 
-  return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-    
-      <input {...register("title")} placeholder="Title" />
-      <p><input {...register("authors")} placeholder="Authors" /></p>
-      <p><input {...register("source")} placeholder="Source" /></p> 
-      <p><input {...register("pubyear")} placeholder="Publication Year" /></p>
-      <p><input {...register("doi")} placeholder="DOI" /></p>
-     
-      <select {...register("sepractice")}>
-        <option value="">Select SE practice...</option>
-        <option value="TDD">TDD</option>
-        <option value="Mob Programming">Mob Programmin</option>
-      </select>
+class SubmissionForm extends Component {
+  constructor() {
+    super();
+    this.state = {
+      title: '',
+      authors:'',
+      source:'',
+      pub_year:'',
+      doi:'',
+      claim: '',
+      evidence: ''
+    };
+  }
 
-      <p>{result}</p>
-      <input type="submit" />
-    </form>
-  );
+  onChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  onSubmit = e => {
+    e.preventDefault();
+
+    const data = {
+      title: this.state.title,
+      authors: this.state.authors,
+      source: this.state.source,
+      pub_date: this.state.pub_date,
+      doi: this.state.doi,
+      claim: this.state.claim,
+      evidence: this.state.evidence
+    };
+
+    axios
+      .post('http://localhost:8082/api/submitted', data)
+      .then(res => {
+        this.setState({
+          title: '',
+          authors:'',
+          source:'',
+          pubdate:'',
+          doi:'',
+          claim: '',
+          evidence: ''
+        })
+        this.props.history.push('/');
+        console.log("submitted succesfully!!")
+      })
+      .catch(err => {
+        console.log("Error in SubmissionForm!");
+      })
+  };
+
+  render() {
+    return (
+     <form noValidate onSubmit={this.onSubmit}>
+         <div className='form-group'>
+           <input
+              type='text'
+              placeholder='Title of the Article'
+              name='title'
+              className='form-control'
+              value={this.state.title}
+              onChange={this.onChange}
+              />
+          </div>
+          <br />
+
+          <div className='form-group'>
+           <input
+              type='text'
+              placeholder='Authors'
+              name='authors'
+              className='form-control'
+              value={this.state.authors}
+              onChange={this.onChange}
+            />
+          </div>
+
+          <div className='form-group'>
+           <input
+              type='text'
+              placeholder='Sources for this article'
+              name='source'
+              className='form-control'
+              value={this.state.source}
+              onChange={this.onChange}
+            />
+          </div>
+
+          <div className='form-group'>
+            <input
+              type='date'
+              placeholder='pubdate'
+              name='pubdate'
+              className='form-control'
+              value={this.state.pubdate}
+              onChange={this.onChange}
+            />
+          </div>
+
+          <div className='form-group'>
+            <input
+              type='text'
+              placeholder='DOI of this Article'
+              name='doi'
+              className='form-control'
+              value={this.state.doi}
+  v           onChange={this.onChange}
+            />
+          </div>
+
+          <div className='form-group'>
+            <input
+              type='text'
+              placeholder='Claim of this Article'
+              name='claim'
+              className='form-control'
+              value={this.state.claim}
+  v           onChange={this.onChange}
+            />
+          </div>
+
+          <div className='form-group'>
+            <input
+              type='text'
+              placeholder='Evidence for this Article'
+              name='evidence'
+              className='form-control'
+              value={this.state.evidence}
+  v           onChange={this.onChange}
+            />
+          </div>
+          <input
+             type="submit"
+              className="btn btn-outline-warning btn-block mt-4"
+          />
+      </form>
+    )}
 }
+
 export default SubmissionForm;
 
