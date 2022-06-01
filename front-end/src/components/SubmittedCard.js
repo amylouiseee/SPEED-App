@@ -1,22 +1,26 @@
 import React from 'react';
 import '../App.css';
+import axios from 'axios';
 
 const SubmittedCard = (props) => {
     const  article  = props.article;
 
     const allow = e => { //pass through to the articles to analyse
         e.preventDefault();
-        console.log("allow");
+
+        //post using axios to articles to analyse
     };
 
     const deny = e => { //delete article from submitted
         e.preventDefault();
-        console.log("deny");
+        
+        //axios.delete here
     };
 
     const check = e => { //this is where you query the db to check if article is duplicate
         e.preventDefault();
-        console.log("check");
+
+        //check if article already exists
     }
 
     return(
