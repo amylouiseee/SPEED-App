@@ -12,7 +12,7 @@ const SEPractice = () => {
               <Dropdown/>
                <Styles>
                  <Table
-                  data={articles}
+                  data={articles} //i would imagine here this would be an api link for heroku so kinda easy to plug it in
                   columns={tablecolumns}
                  />
               </Styles>
