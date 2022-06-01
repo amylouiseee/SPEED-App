@@ -1,6 +1,10 @@
 import React from 'react';
 import '../App.css';
 
+/**
+ * basically same as submitted card but for use in the analysis page
+ */
+
 const AnalyseCard = (props) => {
     const article = props.article;
 
