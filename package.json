@@ -1,16 +1,42 @@
 {
-  "name": "speed-app",
+  "name": "backend",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node backend/server"
+    "app": "nodemon server.js",
+    "build": "cd front-end  && npm run build",
+    "install-client": "cd front-end && npm install",
+    "heroku-postbuild": "npm run install-client && npm run build",
+    "server": "nodemon server.js",
+    "develop": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix front-end\"",
+    "start": "npm run server"
   },
-  "author": "Amy, Amn and Aayesha",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amylouiseee/SPEED-App.git"
+  },
+  "author": "Amy, Amn, Aayesha",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amylouiseee/SPEED-App/issues"
+  },
+  "homepage": "https://github.com/amylouiseee/SPEED-App#readme",
   "dependencies": {
-    "dotenv": "^16.0.0",
-    "express": "^4.18.1"
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.0",
+    "compression": "^1.7.4",
+    "concurrently": "^7.2.0",
+    "config": "^3.3.7",
+    "cors": "^2.8.5",
+    "depd": "^2.0.0",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "mongoose": "^6.3.3",
+    "validation": "0.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
   }
 }
