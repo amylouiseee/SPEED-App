@@ -11,6 +11,8 @@ const SubmittedCard = (props) => {
                 <h2>{article.title}</h2>
                 <h3>{article.authors}</h3>
                 <p>{article.source}</p>
+                <button>Allow</button>
+                <button>Deny</button>
             </div>
         </div>
     )
