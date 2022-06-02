@@ -5,16 +5,42 @@ import axios from 'axios';
 const SubmittedCard = (props) => {
     const  article  = props.article;
 
+    const data = {
+        title: article.title,
+        authors: article.authors,
+        source: article.source,
+        pub_date: article.pub_date,
+        doi: article.doi,
+        claim: article.claim,
+        evidence: article.evidence
+      };
+
     const allow = e => { //pass through to the articles to analyse
         e.preventDefault();
 
-        //post using axios to articles to analyse
+        axios
+        .post('https://speed-cise.herokuapp.com/api/articles', data)
+        .then(res => {
+            deny();
+            props.history.push('/');
+            console.log("Moderation succesful!!")
+        })
+        .catch(err => {
+            console.log("Error in SubmissionCard!");
+        })
     };
 
     const deny = e => { //delete article from submitted
         e.preventDefault();
         
-        //axios.delete here
+        axios
+        .delete('http://speed-cise.herokuapp.com/api/submitted/'+article._id)
+        .then(res => {
+        props.history.push("/");
+        })
+      .catch(err => {
+        console.log("Error form ShowSubmittedDetails_deleteClick");
+      })
     };
 
     const check = e => { //this is where you query the db to check if article is duplicate
@@ -28,7 +54,6 @@ const SubmittedCard = (props) => {
             <div className="desc">
                 <h2>{article.title}</h2>
                 <h3>{article.authors}</h3>
-                <p>{article.source}</p>
                 <button onClick={allow}>Allow</button>
                 <button onClick ={deny}>Deny</button>
                 <button onClick ={check}>Check</button>

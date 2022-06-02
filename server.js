@@ -5,6 +5,8 @@ var cors = require('cors');
 
 // routes
 const submitted = require('./routes/api/submitted');
+const articles = require('./routes/api/articles');
+const speed = require('./routes/api/speed');
 const app = express();
 
 // Connect Database
@@ -21,6 +23,8 @@ app.use(express.json({ extended: false }));
 // use Routes
 
 app.use('/api/submitted', submitted);
+app.use('/api/articles', articles);
+app.use('/api/speed', speed);
 
 const port = process.env.PORT || 5000;
 
