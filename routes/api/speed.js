@@ -2,56 +2,56 @@ const express = require('express');
 const router = express.Router();
 
 // Load Article model
-const Submitted = require('../../models/Submitted');
+const Speed = require('../../models/Speed');
 
-// @route GET api/submitted/test
+// @route GET api/speed/test
 // @description tests articles route
 // @access Public
 router.get('/test', (req, res) => res.send('article route testing!'));
 
-// @route GET api/submitted
+// @route GET api/speed
 // @description Get all articles
 // @access Public
 router.get('/', (req, res) => {
-  Submitted.find()
+  Speed.find()
     .then(article => res.json(article))
     .catch(err => res.status(404).json({ noarticlesfound: 'No Articles found' }));
 });
 
-// @route GET api/submitted/:id
+// @route GET api/speed/:id
 // @description Get article by id
 // @access Public
 router.get('/:id', (req, res) => {
-  Submitted.findById(req.params.id)
+  Speed.findById(req.params.id)
     .then(article => res.json(article))
     .catch(err => res.status(404).json({ nobookfound: 'No Article found' }));
 });
 
-// @route POST api/submitted
+// @route POST api/speed
 // @description add/save article
 // @access Public
 router.post('/', (req, res) => {
-  Submitted.create(req.body)
+  Speed.create(req.body)
     .then(article => res.json({ msg: 'Article added successfully' }))
     .catch(err => res.status(400).json({ error: 'Unable to add this article' }));
 });
 
-// @route POST api/submitted/:id
+// @route POST api/speed/:id
 // @description Update article
 // @access Public
 router.put('/:id', (req, res) => {
-  Submitted.findByIdAndUpdate(req.params.id, req.body)
+  Speed.findByIdAndUpdate(req.params.id, req.body)
     .then(article => res.json({ msg: 'Updated successfully' }))
     .catch(err =>
       res.status(400).json({ error: 'Unable to update the Database' })
     );
 });
 
-// @route DELETE api/submitted/:id
+// @route DELETE api/speed/:id
 // @description Delete article by id
 // @access Public
 router.delete('/:id', (req, res) => {
-  Submitted.findByIdAndRemove(req.params.id, req.body)
+  Speed.findByIdAndRemove(req.params.id, req.body)
     .then(article => res.json({ mgs: 'Article entry deleted successfully' }))
     .catch(err => res.status(404).json({ error: 'No such a article' }));
 });
