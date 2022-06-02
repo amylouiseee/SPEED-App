@@ -9,11 +9,11 @@ class SubmissionForm extends Component {
       title: '',
       authors:'',
       source:'',
-      pub_year:'',
+      pubdate:'',
       doi:'',
       claim: '',
       evidence: '',
-      status: 'unchecked'
+      status: 'Submitted'
     };
   }
 
@@ -28,7 +28,7 @@ class SubmissionForm extends Component {
       title: this.state.title,
       authors: this.state.authors,
       source: this.state.source,
-      pub_date: this.state.pub_date,
+      pubdate: this.state.pubdate,
       doi: this.state.doi,
       claim: this.state.claim,
       evidence: this.state.evidence,

@@ -12,6 +12,8 @@ import SubmitArticle from "./pages/Submit-Article";
 import NotFoundPage from "./pages/404";
 import ShowSubmittedList from "./pages/ShowSubmittedList";
 import ShowModeratedList from "./pages/ShowModeratedList";
+import ShowSubmittedDetails from "./components/ShowSubmittedDetails";
+import ShowModeratedDetails from "./components/ShowModeratedDetails";
 
 const App = () =>  {
     return (
@@ -32,6 +34,8 @@ const App = () =>  {
             <Route  path="/SubmitArticle" element={<SubmitArticle/>}/>
             <Route  path="/ShowSubmittedList" element={<ShowSubmittedList/>}/>
             <Route path="/ShowModeratedList" element={<ShowModeratedList/>}/>
+            <Route path="/show-submitted/:id" element={<ShowSubmittedDetails/>}/>
+            <Route path="/show-moderated/:id" element={<ShowModeratedDetails/>}/>
             <Route exact path="/404" element={<NotFoundPage/>}/>
             <Route path="*" element={<NotFoundPage/>}
     />

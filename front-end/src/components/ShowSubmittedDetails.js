@@ -1,48 +1,87 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component, useEffect, useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
 
-class showSubmittedDetails extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      submitted: {}
-    };
-  }
+const ShowSubmittedDetails = (props) => {
 
-  componentDidMount() {
-    // console.log("Print id: " + this.props.match.params.id);
+    const {id} = useParams();
+    //const submitted = {};
+    const [submitted, setSubmitted] = useState({});
+
+    useEffect(() => {
+    
     axios
-      .get('http://localhost:8082/api/books/'+this.props.match.params.id)
+      .get('https://speed-cise.herokuapp.com/api/submitted/'+id)
       .then(res => {
         // console.log("Print-showBookDetails-API-response: " + res.data);
-        this.setState({
-          book: res.data
-        })
+        setSubmitted(res.data);
       })
       .catch(err => {
-        console.log("Error from ShowBookDetails");
+        console.log("Error from ShowSubmittedDetails");
       })
-  };
+    });
 
-  onDeleteClick (id) {
+  const onDeny = () => {
+    setSubmitted({...submitted, status : "Failed Moderation"})
+    const update = {
+        title: submitted.title,
+        authors: submitted.authors,
+        source: submitted.source,
+        pubdate: submitted.pubdate,
+        doi: submitted.doi,
+        claim: submitted.claim,
+        evidence: submitted.evidence,
+        status: 'Failed Moderation'
+      };
+
     axios
-      .delete('http://localhost:8082/api/books/'+id)
-      .then(res => {
-        this.props.history.push("/");
-      })
-      .catch(err => {
-        console.log("Error form ShowBookDetails_deleteClick");
-      })
+        .put('https://speed-cise.herokuapp.com/api/submitted/'+id, update)
+        .then(res => {
+            console.log("submitted succesfully!!")
+        })
+        .catch(err => {
+            console.log("Error in denying moderation!");
+        })
   };
 
+  const onApprove = () => {
+    setSubmitted({...submitted, status : "Passed Moderation"})
+    const update = {
+        title: submitted.title,
+        authors: submitted.authors,
+        source: submitted.source,
+        pubdate: submitted.pubdate,
+        doi: submitted.doi,
+        claim: submitted.claim,
+        evidence: submitted.evidence,
+        status: 'Passed Moderation'
+      };
 
-  render() {
+    axios
+        .put('https://speed-cise.herokuapp.com/api/submitted/'+id, update)
+        .then(res => {
+            console.log("submitted succesfully!!")
+        })
+        .catch(err => {
+            console.log("Error in denying moderation!");
+        })
 
-    const book = this.state.book;
-    let BookItem = <div>
-      <table className="table table-hover table-dark">
+    axios
+        .post('https://speed-cise.herokuapp.com/api/articles', update)
+        .then(res => {
+           
+        props.history.push('/');
+        console.log("Moderation succesful!!");
+        })
+        .catch(err => {
+            console.log("Error in SubmissionCard!");
+        })
+
+  };
+
+    let SubmittedItem = <div>
+      <table className="table table-hover">
         {/* <thead>
           <tr>
             <th scope="col">#</th>
@@ -55,50 +94,60 @@ class showSubmittedDetails extends Component {
           <tr>
             <th scope="row">1</th>
             <td>Title</td>
-            <td>{ book.title }</td>
+            <td>{ submitted.title }</td>
           </tr>
           <tr>
             <th scope="row">2</th>
-            <td>Author</td>
-            <td>{ book.author }</td>
+            <td>Authors</td>
+            <td>{ submitted.authors }</td>
           </tr>
           <tr>
             <th scope="row">3</th>
-            <td>ISBN</td>
-            <td>{ book.isbn }</td>
+            <td>Source</td>
+            <td>{ submitted.source }</td>
           </tr>
           <tr>
             <th scope="row">4</th>
-            <td>Publisher</td>
-            <td>{ book.publisher }</td>
+            <td>Published Date</td>
+            <td>{ submitted.pubdate }</td>
           </tr>
           <tr>
             <th scope="row">5</th>
-            <td>Published Date</td>
-            <td>{ book.published_date }</td>
+            <td>DOI</td>
+            <td>{ submitted.doi }</td>
           </tr>
           <tr>
             <th scope="row">6</th>
-            <td>Description</td>
-            <td>{ book.description }</td>
+            <td>Claim</td>
+            <td>{ submitted.claim }</td>
+          </tr>
+          <tr>
+            <th scope="row">7</th>
+            <td>Evidence</td>
+            <td>{ submitted.evidence }</td>
+          </tr>
+          <tr>
+            <th scope="row">8</th>
+            <td>Status</td>
+            <td>{ submitted.status }</td>
           </tr>
         </tbody>
       </table>
     </div>
 
     return (
-      <div className="ShowBookDetails">
+      <div className="ShowSubmittedDetails">
         <div className="container">
           <div className="row">
             <div className="col-md-10 m-auto">
               <br /> <br />
-              <Link to="/" className="btn btn-outline-warning float-left">
-                  Moderate Article
+              <Link to="/ShowSubmittedList" className="btn btn-outline-warning float-left">
+                  Go Back to Submitted Articles
               </Link>
             </div>
             <br />
             <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Book's Record</h1>
+              <h1 className="display-4 text-center">Moderate Article</h1>
               <p className="lead text-center">
                   View Submitted Article Info
               </p>
@@ -106,12 +155,15 @@ class showSubmittedDetails extends Component {
             </div>
           </div>
           <div>
-            { BookItem }
+          { SubmittedItem }
           </div>
 
           <div className="row">
             <div className="col-md-6">
-              <button type="button" className="btn btn-outline-danger btn-lg btn-block" onClick={this.onDeleteClick.bind(this,book._id)}>Delete Book</button><br />
+              <button type="button" className="btn btn-outline-success btn-lg btn-block" onClick={onApprove}>Approve</button><br />
+            </div>
+            <div className="col-md-6">
+              <button type="button" className="btn btn-outline-danger btn-lg btn-block" onClick={onDeny}>Deny</button><br />
             </div>
           </div>
             {/* <br />
@@ -122,6 +174,5 @@ class showSubmittedDetails extends Component {
       </div>
     );
   }
-}
 
-export default showBookDetails;
+export default ShowSubmittedDetails;
