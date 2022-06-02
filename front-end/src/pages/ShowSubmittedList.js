@@ -40,7 +40,7 @@ class ShowSubmittedList extends Component {
     }
 
     return (
-      <div className="ShowBookList">
+      <div className="ShowModeratedList">
         <div className="container">
           <div className="row">
             <div className="col-md-12">

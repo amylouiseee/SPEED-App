@@ -11,7 +11,7 @@ import SEPractice from "./pages/SE-Practice";
 import SubmitArticle from "./pages/Submit-Article"; 
 import NotFoundPage from "./pages/404";
 import ShowSubmittedList from "./pages/ShowSubmittedList";
-import AnalyseArticles from "./pages/Analyse-Articles";
+import ShowModeratedList from "./pages/ShowModeratedList";
 
 const App = () =>  {
     return (
@@ -23,7 +23,7 @@ const App = () =>  {
                 <li><NavLink to = "/SEPractice">Search Articles</NavLink></li>
                 <li><NavLink to = "/SubmitArticle">Submit an Article</NavLink></li>
                 <li><NavLink to = "/ShowSubmittedList">Show Submitted Articles</NavLink></li>
-                <li><NavLink to="/AnalyseArticles">Analyse Articles</NavLink></li>
+                <li><NavLink to="/ShowModeratedList">ShowModeratedList</NavLink></li>
           </ul>
           <div className="content">
           <Routes>
@@ -31,7 +31,7 @@ const App = () =>  {
             <Route  path="/SEPractice" element={<SEPractice/>}/>
             <Route  path="/SubmitArticle" element={<SubmitArticle/>}/>
             <Route  path="/ShowSubmittedList" element={<ShowSubmittedList/>}/>
-            <Route path="/AnalyseArticles" element={<AnalyseArticles/>}/>
+            <Route path="/ShowModeratedList" element={<ShowModeratedList/>}/>
             <Route exact path="/404" element={<NotFoundPage/>}/>
             <Route path="*" element={<NotFoundPage/>}
     />
