@@ -24,6 +24,7 @@ const ShowModeratedDetails = (props) => {
     });
 
   const onDeny = () => {
+ 
     axios
         .delete('https://speed-cise.herokuapp.com/api/articles/'+id)
         .then(res => {
@@ -33,11 +34,11 @@ const ShowModeratedDetails = (props) => {
         console.log("Error form ShowModeratedDetails_deleteClick");
       })
 
-      navigate("../ShowModeratedList", { replace: true });
+      navigate("../", { replace: true });
   };
 
   const onApprove = () => {
-
+    
     axios
         .post('https://speed-cise.herokuapp.com/api/speed', moderated)
         .then(res => {
@@ -48,6 +49,17 @@ const ShowModeratedDetails = (props) => {
         .catch(err => {
             console.log("Error in Analysis!");
         })
+
+    axios
+        .delete('https://speed-cise.herokuapp.com/api/articles/'+id)
+        .then(res => {
+            props.history.push("/"); 
+        })
+      .catch(err => {
+        console.log("Error form ShowModeratedDetails_deleteClick");
+      })
+
+      navigate("../", { replace: true });
 
   };
 

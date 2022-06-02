@@ -22,7 +22,7 @@ const App = () =>  {
           <h1>Software Engineering Practice Evidence Repository (SEPER)</h1>
           <ul className="header">
                 <li><NavLink exact to = "/">Home</NavLink></li>
-                <li><NavLink to = "/SEPractice">Search Articles</NavLink></li>
+                <li><NavLink to = "/SEPractice">Accepted Articles</NavLink></li>
                 <li><NavLink to = "/SubmitArticle">Submit an Article</NavLink></li>
                 <li><NavLink to = "/ShowSubmittedList">Show Submitted Articles</NavLink></li>
                 <li><NavLink to="/ShowModeratedList">Analyse Articles</NavLink></li>

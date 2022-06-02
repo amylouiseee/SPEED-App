@@ -9,8 +9,8 @@ const tablecolumns = [
       Header: 'Source',
       accessor: 'source'
     }, {
-      Header: 'Pub. Year',
-      accessor: 'pubyear'
+      Header: 'Pub. Date',
+      accessor: 'pubdate'
     },{
       Header: 'DOI',
       accessor: 'doi'
