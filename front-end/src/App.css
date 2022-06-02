@@ -59,11 +59,13 @@
 .desc {
   height: 130px;
   padding: 10px;
+  align-content: center;
 }
 
 .desc h2 {
   font-size: 1em;
   font-weight: 400;
+  padding: 10px 0 10px 0;
 }
 
 .desc h3, p {
@@ -74,4 +76,8 @@
   color: #6c757d;
   font-size: 1em;
   padding: 10px 0 10px 0;
+}
+
+.buttons button {
+  margin: 10px;
 }
