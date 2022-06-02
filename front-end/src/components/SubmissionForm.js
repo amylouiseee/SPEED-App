@@ -12,7 +12,8 @@ class SubmissionForm extends Component {
       pub_year:'',
       doi:'',
       claim: '',
-      evidence: ''
+      evidence: '',
+      status: 'unchecked'
     };
   }
 
@@ -30,7 +31,8 @@ class SubmissionForm extends Component {
       pub_date: this.state.pub_date,
       doi: this.state.doi,
       claim: this.state.claim,
-      evidence: this.state.evidence
+      evidence: this.state.evidence,
+      status: this.state.status
     };
 
     axios

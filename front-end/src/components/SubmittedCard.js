@@ -34,7 +34,7 @@ const SubmittedCard = (props) => {
         e.preventDefault();
         
         axios
-        .delete('http://speed-cise.herokuapp.com/api/submitted/'+article._id)
+        .delete('https://speed-cise.herokuapp.com/api/submitted/'+article._id)
         .then(res => {
         props.history.push("/");
         })

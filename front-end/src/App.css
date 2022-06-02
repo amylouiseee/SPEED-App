@@ -46,12 +46,14 @@
 }
 
 .card-container {
-  width: 250px;
-  height: 200px;
+  width: 300px;
+  height: 250px;
   border: 1px solid rgba(0,0,.125);
   margin: 0 auto;
-  border-radius: 5px;
+  border-radius: 10px;
   overflow: scroll;
+  padding: 10px;
+  align-self: center;
 }
 
 .desc {
